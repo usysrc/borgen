@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  flipt:
+    image: markphelps/flipt:latest
+    container_name: flipt_app
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://flipt_user:flipt_pass@postgres/flipt_db
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin_password
+    depends_on:
+      - postgres
+    networks:
+      - flipt_network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      - POSTGRES_DB=flipt_db
+      - POSTGRES_USER=flipt_user
+      - POSTGRES_PASSWORD=flipt_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - flipt_network
+
+  gui: 
+    build:
+      context: ./gui # 
+      dockerfile: Dockerfile
+    container_name: gui 
+    ports:
+      - "8081:80" # Map port 8081 of the host to port 80 of the container
+    networks:
+      - flipt_network
+
+networks:
+  flipt_network:
+
+volumes:
+  postgres_data:
