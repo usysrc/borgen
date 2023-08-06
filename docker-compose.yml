@@ -29,16 +29,6 @@ services:
     networks:
       - flipt_network
 
-  gui: 
-    build:
-      context: ./gui # 
-      dockerfile: Dockerfile
-    container_name: gui 
-    ports:
-      - "8081:80" # Map port 8081 of the host to port 80 of the container
-    networks:
-      - flipt_network
-
 networks:
   flipt_network:
 
