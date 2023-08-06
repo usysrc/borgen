@@ -8,8 +8,8 @@ services:
       - "8080:8080"
     environment:
       - DATABASE_URL=postgres://flipt_user:flipt_pass@postgres/flipt_db
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=admin_password
+    volumes:
+      - ./default.yml:/app/default.yml   # Mount the default.yml file into the container
     depends_on:
       - postgres
     networks:
@@ -22,7 +22,7 @@ services:
       - POSTGRES_DB=flipt_db
       - POSTGRES_USER=flipt_user
       - POSTGRES_PASSWORD=flipt_pass
-    ports:
+    ports:  
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data

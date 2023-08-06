@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+  import { useFlagEnabled } from '@/components/flag';
+
+  const { isTestFlagEnabled } = useFlagEnabled('test');
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    hi
+    <p v-if="isTestFlagEnabled">
+      hi from inside the flag
+    </p>
   </main>
 </template>

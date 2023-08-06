@@ -1,0 +1,20 @@
+# default.yml for flipt
+postgres:
+  host: postgres
+  port: 5433
+  dbname: flipt_db
+  user: flipt_user
+  password: flipt_pass
+  sslmode: disable
+
+admin:
+  username: admin
+  password: admin_password
+
+api:
+  host: 0.0.0.0
+  port: 8080
+
+cors:
+  enabled: true
+  allowed_origins: "localhost:5173"
